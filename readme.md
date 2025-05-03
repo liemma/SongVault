@@ -16,11 +16,6 @@
 - **Backend:** Python, Flask  
 - **Database:** In-memory (can be swapped for SQLite or PostgreSQL)
 
-## 📸 Screenshots
-
-> *(Include screenshots here if available!)*  
-> Example: `Add Song` form, real-time search results, and the catalog table.
-
 ## 🧪 Running Locally
 
 1. Clone the repository:
