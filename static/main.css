@@ -1,0 +1,80 @@
+.navbar {
+    background-color: #add8e6 !important;  /* Light blue */
+}
+
+.title{
+    color: black;
+}
+
+.description{
+    color: darkgrey;
+}
+
+.text-dark-primary {
+    color: #5d5d5d; /* Darker color for emphasis */
+    font-weight: 500;
+}
+
+.text-light-secondary {
+    color: #888; /* Lighter grey for subtle emphasis */
+}
+
+/*Music buttons style*/
+.card {
+    background-color: white !important;  /* Light grey background */
+    border: none; /* Removes default border */
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); /* Adds a soft shadow */
+    border-radius: 8px; /* Rounded corners */
+}
+
+.card-title{
+    color: #5d5d5d;
+    font-weight: 500;
+}
+
+/*Primary buttons style*/
+.btn-primary {
+    background-color: #e88c65 !important;  /* Light blue */
+    border-color: #e88c65 !important;
+    color: black !important; /* Ensures text contrast */
+}
+
+/*Search button style*/
+.btn-outline-success {
+    background-color: #d3d3d3 !important;  /* Light grey */
+    border-color: #d3d3d3 !important;
+    color: black !important; /* Ensures text is readable */
+}
+
+
+/*Other customizations*/
+.text-justify {
+    text-align: justify;
+}
+
+.fw-bold {
+    font-weight: bold;
+}
+
+.text-muted {
+    color: #6c757d; /* Bootstrap default muted color */
+}
+
+.form-label{
+    font-weight: bold;
+}
+
+/* Change link color */
+a {
+    color: black !important; /* Set links to black */
+    text-decoration: none; /* Remove underline */
+}
+
+.extra-bold {
+    font-weight: bold;  /* Stronger bold */
+    font-size: 1.1em;  /* Slightly larger */
+    color: black;  /* Ensures high contrast */
+    background-color: yellow;
+    padding: 2px;
+    border-radius: 3px;
+}

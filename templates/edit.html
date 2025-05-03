@@ -1,0 +1,109 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<script type="text/javascript" src="{{ url_for('static', filename = 'edit.js') }}"></script>
+    
+    <script>
+        let song = {{song|tojson}}
+        let all_data = {{all_data|tojson}}
+        // console.log(data)
+    </script>
+
+
+    <!-- Success Message (Hidden by Default) -->
+    <div id="success-message" class="alert alert-success d-none" style="display: none;">
+        <strong>New item successfully created.</strong> 
+        <a id="view-link" href="#" class="btn btn-success btn-sm ms-2">See it here</a>
+    </div>
+
+    <!-- Song Submission Form -->
+<form id="edit-song-form" class="mt-3">
+    <div class="mb-3">
+        <label class="form-label">Title</label>
+        <input type="text" name="title" id="title" class="form-control" value="{{ song.title if song else '' }}">
+        <small id="error-title" class="text-danger d-none"></small>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Artist</label>
+        <input type="text" name="artist" id="artist" class="form-control" value="{{ song.artist if song else '' }}">
+        <small id="error-artist" class="text-danger d-none"></small>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Writers (comma-separated)</label>
+        <input type="text" name="writers" id="writers" class="form-control" value="{{ song.writers | join(', ') if song else '' }}">
+        <small id="error-writers" class="text-danger d-none"></small>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Album</label>
+        <input type="text" name="album" id="album" class="form-control" value="{{ song.album if song else '' }}">
+        <small id="error-album" class="text-danger d-none"></small>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Year</label>
+        <input type="text" name="year" id="year" class="form-control" value="{{ song.year if song else '' }}">
+        <small id="error-year" class="text-danger d-none"></small>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Summary</label>
+        <textarea name="summary" id="summary" class="form-control">{{ song.summary if song else '' }}</textarea>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Genre (comma-separated)</label>
+        <input type="text" name="genre" id="genre" class="form-control" value="{{ song.genre | join(', ') if song else '' }}">
+    </div>
+
+
+    <div class="mb-3">
+        <label class="form-label">Duration</label>
+        <input type="text" name="duration" id="duration" class="form-control" value="{{ song.duration if song else '' }}">
+        <small id="error-duration" class="text-danger d-none"></small>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Song Cover URL</label>
+        <input type="text" name="song_cover" id="song_cover" class="form-control" value="{{ song.song_cover if song else '' }}">
+        <small id="error-song_cover" class="text-danger d-none"></small>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Lyrics Link</label>
+        <input type="text" name="lyrics_link" id="lyrics_link" class="form-control" value="{{ song.lyrics_link if song else '' }}">
+        <small id="error-lyrics_link" class="text-danger d-none"></small>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Music Video Link</label>
+        <input type="text" name="music_video" id="music_video" class="form-control" value="{{ song.music_video if song else '' }}">
+        <small id="error-music_video" class="text-danger d-none"></small>
+    </div>
+
+    <label class="form-label">Similar Songs</label>
+    <select id="similar_songs" class="form-control" multiple>
+        {% for song_id, song_data in all_data.items() %}
+            {% if song_id != song.id %}  <!-- ✅ Exclude the current song -->
+                <option value="{{ song_id }}"
+                    {% if song_id in song.similar_song_ids %}selected{% endif %}>
+                    {{ song_data.title }} by {{ song_data.artist }}
+                </option>
+            {% endif %}
+        {% endfor %}
+    </select>
+    <small class="text-muted">Hold Ctrl (Windows) or Cmd (Mac) to select multiple songs.</small>
+</div>
+
+
+    <!-- Submit and Discard Buttons -->
+    <button type="submit" class="btn btn-primary" id="save-button">Submit</button>
+    <button type="button" class="btn btn-secondary" id="discard-button">Discard Changes</button>
+</form>
+
+
+{% endblock %}
+

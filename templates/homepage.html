@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<script type="text/javascript" src="{{ url_for('static', filename = 'homepage.js') }}"></script>
+
+<script>
+    let data = {{data|tojson}} 
+    // console.log(data)
+</script>
+
+<div class="mt-5 text-center">
+    <h1 class="title">Discover Your Next Favorite Self-Written Song!</h1>
+    
+    <img src="https://media.istockphoto.com/id/1212761279/vector/gold-music-notes-bacground.jpg?s=612x612&w=0&k=20&c=f090GwAplDVY1l1qKJnfxwj_96b2ey11Tlv_32qoXDI=" 
+         alt="Music Notes Background" 
+         class="img-fluid mt-3" 
+         style="max-width: 600px; border-radius: 10px;">
+
+         <p class="mt-3 description">
+          <span class="text-dark-primary">
+              Welcome to our website where people can search for and add original self-written songs! 
+              Explore unique music, support singer-songwriters, and find your next favorite song.
+          </span> 
+          <br>
+          <span class="text-light-secondary">
+              Click on a popular song below to learn more!
+          </span>
+      </p>
+      
+</div>
+
+<h1 class="mt-4 title">Most Popular Self-Written Songs!</h1>
+
+<div id="popular-songs" class="row mt-3">
+  <!-- Songs will be populated dynamically -->
+</div>
+
+
+{% endblock %}
+
+
+

@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    
+    <script>
+        let query = {{query|tojson}}
+        let results = {{results|tojson}} 
+        let no_results = {{no_results|tojson}} 
+        let result_count = {{result_count|tojson}} 
+        // console.log(data)
+    </script>
+
+{% if no_results %}
+  <h1 class="text">No matches found for "{{ query }}"</strong></h1>
+{%else%}
+<h1>Showing {{ result_count }} result{{ 's' if result_count != 1 else '' }} for "{{ query }}"</h1>
+
+{% endif %}
+
+
+      <div class="row">
+        {% for id, song in results.items() %}
+                <div class="col-md-4 mb-4 d-flex justify-content-center">
+                    <div class="card shadow-sm p-3 text-center">
+                        <a href="/view/{{ id }}" class="d-block">
+                            <img src="{{ song.song_cover }}" alt="{{ song.title }}" class="card-img-top img-fluid rounded"
+                                style="max-height: 200px; object-fit: cover;">
+                        </a>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ song.title | bold_match(query) | safe }}</h5>
+                            <p class="card-text text">Written by: {{ song.writers | join(", ") | bold_match(query) | safe }}</p>
+                            <p class="card-text text">Album: {{ song.album | bold_match(query) | safe }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+    </div>
+
+
+{% endblock %}
+

@@ -1,0 +1,70 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+    
+    <script>
+        let song = {{song|tojson}}
+        let data = {{data|tojson}}
+        // console.log(data)
+    </script>
+
+
+    <div class="container mt-4">
+      <!-- Title and Artist -->
+      <h1 class="fw-bold">{{ song.title }}, 
+        <span class="text-muted" style="font-weight: normal;">{{ song.artist }}</span>
+          <span class="text-muted" style="font-size: 1.2rem;">{{ song.year }}</span>
+      </h1>
+  
+      <div class="row mt-3">
+          <!-- Left: Song Cover -->
+          <div class="col-md-4 text-center">
+              {% if song.song_cover %}
+                  <img src="{{ song.song_cover }}" alt="{{ song.title }} cover" class="img-fluid rounded shadow" style="max-width: 100%;">
+              {% endif %}
+          </div>
+  
+          <!-- Right: Song Details -->
+          <div class="col-md-8">
+              <p><strong>Album:</strong> <a href="/search/{{ song.album }}" class="text-primary">{{ song.album }}</a></p>
+              <p><strong>Written By:</strong> 
+                {% for writer in song.writers %}
+                    <a href="/search/{{ writer }}" class="text-primary">{{ writer }}</a>{% if not loop.last %}, {% endif %}
+                {% endfor %}
+            </p>
+              <p><strong>Duration:</strong> {{ song.duration }}</p>
+              
+              <div class="summary">
+                <span class="mt-3"><strong>Summary:</strong>
+                 
+                <span class="text-justify">{{ song.summary }}</span>
+              </div>
+    
+  
+              <p class="mt-3"><strong>Genre:</strong> {{ song.genre | join(", ") }}</p>
+  
+              <!-- Lyrics & Music Video Links -->
+              <p><strong>Lyrics:</strong> <a href="{{ song.lyrics_link }}" target="_blank" class="text-primary">Lyrics Link</a></p>
+              <p><strong>Music Video:</strong> <a href="{{ song.music_video }}" target="_blank" class="text-primary">Watch on Youtube</a></p>
+          </div>
+      </div>
+  
+      <!-- Similar Songs -->
+      <div class="mt-4">
+          <h4 class="fw-bold">Similar Songs:</h4>
+          <ul>
+              {% for song_id in song.similar_song_ids %}
+                  <li><a href="/view/{{ song_id }}" class="text-dark">{{ data[song_id].title }}</a></li>
+              {% endfor %}
+          </ul>
+      </div>
+  
+      <!-- Edit Button (Not very salient) -->
+    <a href="/edit/{{ song.id }}" class="btn btn-primary btn mt-3">Edit Song</a>
+  </div>
+
+
+
+{% endblock %}
+
